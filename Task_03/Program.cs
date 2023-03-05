@@ -5,84 +5,48 @@
 // 5 9 2 3
 // 8 4 2 4
 // Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3.
+int n = 3;
+int m = 4;
 
-int[,] GenerateArray(int row, int col) 
-{ 
-    int[,] array = new int[row, col]; // Создаем 2-мерный массив 
-    Random random = new Random(); 
-    for (int i = 0; i < array.GetLength(0); i++) 
-    { 
-        for (int j = 0; j < array.GetLength(1); j++) 
-        { 
-            array[i, j] = random.Next(2, 10); 
-        } 
-    } 
-    return array; 
-} 
- 
-void PrintArray(int[,] array) 
-{ 
-    for (int i = 0; i < array.GetLength(0); i++) 
-    { 
-        Console.WriteLine(); 
-        for (int j = 0; j < array.GetLength(1); j++) 
-        { 
-            Console.Write($"{array[i, j]}\t"); 
-        } 
-    } 
-    Console.WriteLine(); 
-} 
- 
-int InputUser(string message) 
-{ 
-    System.Console.Write($"{message}  => "); 
-    return Convert.ToInt32(Console.ReadLine()); 
-} 
- 
+int[,] array = new int[n, m];
+GenerateArray(array);
+PrintArray(array);
+Console.WriteLine();
+Console.Write($"Среднеарифметическая каждого столбца равна: ");
 
- double Average1(int[0, 0] array) 
-{ 
-    double result = 0; 
-    foreach (var item in array) 
-    { 
-        result += item; 
-    } 
-    return result / array.Length; 
-} 
+void GenerateArray(int[,] array)
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            array[i, j] = new Random().Next(0, 10);
+        }
+    }
+}
 
-double Average2(int[1, 0] array) 
-{ 
-    double result = 0; 
-    foreach (var item in array) 
-    { 
-        result += item; 
-    } 
-    return result / array.Length; 
-} 
+void PrintArray(int[,] array)
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        Console.WriteLine();
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            Console.Write($"{array[i, j]}\t");
+        }
+    }
+    Console.WriteLine();
+}
 
-double Average3(int[2, 0] array) 
-{ 
-    double result = 0; 
-    foreach (var item in array) 
-    { 
-        result += item; 
-    } 
-    return result / array.Length; 
-} 
 
-double Average4(int[3, 0] array) 
-{ 
-    double result = 0; 
-    foreach (var item in array) 
-    { 
-        result += item; 
-    } 
-    return result / array.Length; 
-} 
-
-double[,] matrix = GenerateArray(3, 4); 
-PrintArray(matrix); 
-
-Console.WriteLine($"Среднее арифметическое каждого столбца: {Average1(matrix)}:F, {Average2(matrix)}:F, {Average3(matrix)}:F, {Average4(matrix)}:F");
-
+for (int j = 0; j < array.GetLength(1); j++)
+{
+    double result = 0;
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        result = (result + array[i, j]);
+    }
+    result = result / n;
+    Console.Write($"{result:F}; ");
+}
 
