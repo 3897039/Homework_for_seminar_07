@@ -6,19 +6,21 @@
 // 8 4 2 4
 // 1, 7 -> такого числа в массиве нет
 
-int[,] GenerateArray(int row, int col) 
-{ 
-    int[,] array = new int[row, col]; // Создаем 2-мерный массив 
-    Random random = new Random(); 
-    for (int i = 0; i < array.GetLength(0); i++) 
-    { 
-        for (int j = 0; j < array.GetLength(1); j++) 
-        { 
-            array[i, j] = random.Next(2, 100); 
-        } 
-    } 
-    return array; 
-} 
+int n = 3;
+int m = 3;
+int[,] array = new int[n, m];
+GenerateArray(array);
+PrintArray(array);
+void GenerateArray(int[,] array)
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            array[i, j] = new Random().Next(0, 10);
+        }
+    }
+}
  
 void PrintArray(int[,] array) 
 { 
@@ -39,27 +41,19 @@ int InputUser(string message)
     return Convert.ToInt32(Console.ReadLine()); 
 } 
  
- (bool isNotFinde, int row, int col) FindePosition(int[,] array) 
-{ 
-    row = Convert.ToInt32(textBox1.Text);
-    col = Convert.ToInt32(textBox2.Text);
-    Int32[,] array2 = new Int32[row, col];
-    for (int i = 0; i < array.GetLength(0); i++) 
-    { 
-        for (int j = 0; j < array.GetLength(1); j++) 
-        { 
-            if (array2[row, col] == array[i, j]) 
-            { 
-                return (true, i, j); 
-            } 
-        } 
-    } 
-    return (false, -1, -1); 
-} 
+Console.WriteLine("введите номер строки");
+int k = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("введите номер столбца");
+int y = Convert.ToInt32(Console.ReadLine());
 
-int[,] matrix = GenerateArray(4, 4); 
-PrintArray(matrix); 
-int k = InputUser("Введите индекс строки"); 
-int y = InputUser("Введите индекс столбца"); 
-var result = FindePosition(matrix, array2); 
-if (result.isNotFinde) Console.WriteLine("Такого элемента нет"); 
+ if (k > array.GetLength(0) || y > array.GetLength(1))
+{
+    Console.WriteLine("такого элемента нет");
+}
+else
+{
+    Console.WriteLine($"значение элемента {k} строки и {y} столбца равно {array[k-1,y-1]}");
+}
+
+
+
